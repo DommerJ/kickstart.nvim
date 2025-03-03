@@ -641,7 +641,13 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
+        tinymist ={
+          setting = {
+            formatterMode = "typstyle",
+            exportPdf = "onType",
+            semanticTokens = "disable"
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -691,7 +697,12 @@ require('lazy').setup({
       }
     end,
   },
-
+  { -- preview for typst
+      'chomosuke/typst-preview.nvim',
+      lazy = false, -- or ft = 'typst'
+      version = '1.*',
+      opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+  },
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
