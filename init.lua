@@ -166,6 +166,11 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Enable spellcheck
+vim.keymap.set('n', '<leader>scg', ':setlocal spell spelllang=de<cr>', { desc = '[S]pell [C]heck [G]erman', noremap = true })
+vim.keymap.set('n', '<leader>sce', ':setlocal spell spelllang=en_us<cr>', { desc = '[S]pell [C]heck [E]nglish US', noremap = true })
+vim.keymap.set('n', '<leader>scd', ':setlocal nospell<cr>', { desc = '[S]pell [C]heck [D]isabled', noremap = true })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -641,11 +646,11 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-        tinymist ={
+        tinymist = {
           setting = {
-            formatterMode = "typstyle",
-            exportPdf = "onType",
-            semanticTokens = "disable"
+            formatterMode = 'typstyle',
+            exportPdf = 'onType',
+            semanticTokens = 'disable',
           },
         },
         lua_ls = {
@@ -698,20 +703,20 @@ require('lazy').setup({
     end,
   },
   { -- preview for typstjj
-      'chomosuke/typst-preview.nvim',
-      lazy = false, -- or ft = 'typst'
-      version = '1.*',
-      opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+    'chomosuke/typst-preview.nvim',
+    lazy = false, -- or ft = 'typst'
+    version = '1.*',
+    opts = {}, -- lazy.nvim will implicitly calls `setup {}`
   },
   { -- surround text fast
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
     config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
-    end
+      require('nvim-surround').setup {
+        -- Configuration here, or leave empty to use defaults
+      }
+    end,
   },
   { -- Autoformat
     'stevearc/conform.nvim',
