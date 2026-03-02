@@ -171,10 +171,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Enable spellcheck
-vim.keymap.set('n', '<leader>scg', ':setlocal spell spelllang=de<cr>',
-  { desc = '[S]pell [C]heck [G]erman', noremap = true })
-vim.keymap.set('n', '<leader>sce', ':setlocal spell spelllang=en_us<cr>',
-  { desc = '[S]pell [C]heck [E]nglish US', noremap = true })
+vim.keymap.set('n', '<leader>scg', ':setlocal spell spelllang=de<cr>', { desc = '[S]pell [C]heck [G]erman', noremap = true })
+vim.keymap.set('n', '<leader>sce', ':setlocal spell spelllang=en_us<cr>', { desc = '[S]pell [C]heck [E]nglish US', noremap = true })
 vim.keymap.set('n', '<leader>scd', ':setlocal nospell<cr>', { desc = '[S]pell [C]heck [D]isabled', noremap = true })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -295,7 +293,7 @@ require('lazy').setup({
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
@@ -341,7 +339,7 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
-        { '<leader>c', group = '[C]ode',     mode = { 'n', 'x' } },
+        { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
@@ -381,7 +379,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
 
       -- add args to grep search
       {
@@ -412,14 +410,16 @@ require('lazy').setup({
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       local lga_actions = require 'telescope-live-grep-args.actions'
+      local open_multi_selection = require 'custom.plugins.configs.telescope_open_single_or_multi'
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
-          --   mappings = {
-          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-          --   },
+          mappings = {
+            i = { ['<c-enter>'] = 'to_fuzzy_refine', ['<CR>'] = open_multi_selection.open_single_or_multi },
+            n = { ['<CR>'] = open_multi_selection.open_single_or_multi },
+          },
           layout_config = {
             vertical = { width = 0.95 },
             horizontal = { width = 0.95 },
@@ -434,7 +434,7 @@ require('lazy').setup({
           live_grep_args = {
             auto_quoting = true, -- enable/disable auto-quoting
             -- define mappings, e.g.
-            mappings = {         -- extend mappings
+            mappings = { -- extend mappings
               i = {
                 ['<C-k>'] = lga_actions.quote_prompt(),
                 ['<C-i>'] = lga_actions.quote_prompt { postfix = ' --iglob ' },
@@ -521,7 +521,7 @@ require('lazy').setup({
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
@@ -743,13 +743,13 @@ require('lazy').setup({
       }
     end,
   },
-  {                -- preview for typstjj
+  { -- preview for typstjj
     'chomosuke/typst-preview.nvim',
-    lazy = false,  -- or ft = 'typst'
+    lazy = false, -- or ft = 'typst'
     version = '1.*',
-    opts = {},     -- lazy.nvim will implicitly calls `setup {}`
+    opts = {}, -- lazy.nvim will implicitly calls `setup {}`
   },
-  {                -- surround text fast
+  { -- surround text fast
     'kylechui/nvim-surround',
     version = '*', -- Use for stability; omit to use `main` branch for the latest features
     event = 'VeryLazy',
@@ -967,7 +967,12 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = { signs = false },
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -1012,7 +1017,20 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'python', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'python',
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

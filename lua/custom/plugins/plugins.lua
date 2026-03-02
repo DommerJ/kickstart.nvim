@@ -22,9 +22,21 @@ local plugins = {
       require 'custom.plugins.configs.none-ls'
     end,
   },
+  -- text to diagram with d2
   {
     'terrastruct/d2-vim',
     ft = { 'd2' },
+  },
+  -- markdown, svg, html preview
+  {
+    'brianhuster/live-preview.nvim',
+    dependencies = {
+      -- You can choose one of the following pickers
+      'nvim-telescope/telescope.nvim',
+      'ibhagwan/fzf-lua',
+      'echasnovski/mini.pick',
+      'folke/snacks.nvim',
+    },
   },
 }
 return plugins
