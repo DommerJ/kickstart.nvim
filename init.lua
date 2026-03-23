@@ -90,12 +90,8 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
--- set python variable
-vim.g.python3_host_prog = 'C:\\Users\\s5838442\\.pyenv\\pyenv-win\\versions\\pypy3.11-v7.3.19-win64\\python.exe'
-vim.g.python_host_prog = 'C:\\Users\\s5838442\\.pyenv\\pyenv-win\\versions\\pypy3.11-v7.3.19-win64\\python.exe'
-
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -124,6 +120,17 @@ end)
 
 -- Enable break indent
 vim.opt.breakindent = true
+
+-- Shift width
+vim.opt.shiftwidth = 4
+
+-- Execute lua code
+vim.keymap.set('n', '<space><space>x', '<cmd>source %<CR>')
+vim.keymap.set('n', '<space>x', ':.lua<CR>')
+vim.keymap.set('v', '<space>x', ':lua<CR>')
+
+-- where am I in large xml
+vim.keymap.set('n', '<space><space>w', ':MatchupWhereAmI\\?<CR>')
 
 -- Save undo history
 vim.opt.undofile = true
@@ -360,7 +367,7 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    branch = 'master',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -1013,35 +1020,8 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = {
-        'python',
-        'bash',
-        'c',
-        'diff',
-        'html',
-        'lua',
-        'luadoc',
-        'markdown',
-        'markdown_inline',
-        'query',
-        'vim',
-        'vimdoc',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --

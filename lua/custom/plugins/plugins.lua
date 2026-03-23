@@ -5,10 +5,14 @@
 local plugins = {
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
     init = function()
+      vim.g.no_plugin_maps = true
+    end,
+    config = function()
       require 'custom.plugins.configs.nvim-treesitter-textobjects'
     end,
   },
@@ -36,6 +40,21 @@ local plugins = {
       'ibhagwan/fzf-lua',
       'echasnovski/mini.pick',
       'folke/snacks.nvim',
+    },
+  },
+  -- jump to matching tag
+  {
+    'andymass/vim-matchup',
+    opts = {
+      treesitter = {
+        stopline = 500,
+      },
+      surround = {
+        enabled = 1,
+      },
+      transmute = {
+        enabled = 1,
+      },
     },
   },
 }
