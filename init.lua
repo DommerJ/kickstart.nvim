@@ -723,11 +723,12 @@ require('lazy').setup({
       end
     end,
   },
-  { -- preview for typstjj
+  { -- preview for typst
     'chomosuke/typst-preview.nvim',
     lazy = false, -- or ft = 'typst'
     version = '1.*',
     opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+  },
 
   { -- Autoformat
     'stevearc/conform.nvim',
@@ -768,7 +769,6 @@ require('lazy').setup({
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
->>>>>>> upstream/master
   },
   { -- surround text fast
     'kylechui/nvim-surround',
@@ -1035,8 +1035,8 @@ require('lazy').setup({
 
           -- enables treesitter based folds
           -- for more info on folds see `:help folds`
-          -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-          -- vim.wo.foldmethod = 'expr'
+          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.wo.foldmethod = 'expr'
 
           -- enables treesitter based indentation
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
@@ -1092,6 +1092,7 @@ require('lazy').setup({
     },
   },
 })
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
