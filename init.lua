@@ -123,12 +123,12 @@ vim.o.breakindent = true
 vim.opt.shiftwidth = 4
 
 -- Execute lua code
-vim.keymap.set('n', '<space><space>x', '<cmd>source %<CR>')
+vim.keymap.set('n', '<space><C-x>', '<cmd>source %<CR>')
 vim.keymap.set('n', '<space>x', ':.lua<CR>')
 vim.keymap.set('v', '<space>x', ':lua<CR>')
 
 -- where am I in large xml
-vim.keymap.set('n', '<space><space>w', ':MatchupWhereAmI\\?<CR>')
+vim.keymap.set('n', '<space>w', ':MatchupWhereAmI\\?<CR>')
 
 -- Enable undo/redo changes even after closing and reopening a file
 vim.o.undofile = true
@@ -1092,7 +1092,6 @@ require('lazy').setup({
     },
   },
 })
-
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
