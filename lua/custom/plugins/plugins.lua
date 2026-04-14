@@ -9,12 +9,8 @@ local plugins = {
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
-    init = function()
-      vim.g.no_plugin_maps = true
-    end,
-    config = function()
-      require 'custom.plugins.configs.nvim-treesitter-textobjects'
-    end,
+    init = function() vim.g.no_plugin_maps = true end,
+    config = function() require 'custom.plugins.configs.nvim-treesitter-textobjects' end,
   },
   {
     'nvimtools/none-ls.nvim',
@@ -22,9 +18,7 @@ local plugins = {
       'nvimtools/none-ls-extras.nvim',
       'jayp0521/mason-null-ls.nvim', -- ensure dependencies are installed
     },
-    config = function()
-      require 'custom.plugins.configs.none-ls'
-    end,
+    config = function() require 'custom.plugins.configs.none-ls' end,
   },
   -- text to diagram with d2
   {
@@ -56,6 +50,34 @@ local plugins = {
         enabled = 1,
       },
     },
+  },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
+    config = function()
+      require('oil').setup {
+        columns = { 'icon' },
+        keymaps = {
+          ['<C-h>'] = false,
+          ['<M-h>'] = 'actions.select_split',
+        },
+        view_options = {
+          show_hidden = true,
+        },
+      }
+      -- Open parent directory in current window
+      vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+
+      -- Open parent directory in floating window
+      vim.keymap.set('n', '<space>-', require('oil').toggle_float)
+    end,
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
   },
 }
 return plugins
