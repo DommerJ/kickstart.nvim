@@ -125,6 +125,9 @@ vim.opt.shiftwidth = 4
 -- Search within selected area
 vim.keymap.set('v', '<M-/>', '<ESC>/\\%V')
 
+-- Search text of selected area
+vim.keymap.set('v', '//', 'y/\\V<C-R>=escape(@","/")<CR><CR>')
+
 -- Execute lua code
 vim.keymap.set('n', '<space><C-x>', '<cmd>source %<CR>')
 vim.keymap.set('n', '<space>x', ':.lua<CR>')
