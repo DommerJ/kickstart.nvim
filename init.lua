@@ -414,6 +414,7 @@ require('lazy').setup({
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       local lga_actions = require 'telescope-live-grep-args.actions'
+      local actions = require 'telescope.actions'
       local open_multi_selection = require 'custom.plugins.configs.telescope_open_single_or_multi'
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
@@ -421,8 +422,8 @@ require('lazy').setup({
         --
         defaults = {
           mappings = {
-            i = { ['<c-enter>'] = 'to_fuzzy_refine', ['<CR>'] = open_multi_selection.open_single_or_multi },
-            n = { ['<CR>'] = open_multi_selection.open_single_or_multi },
+            i = { ['<c-enter>'] = 'to_fuzzy_refine', ['<CR>'] = open_multi_selection.open_single_or_multi, ['<c-d>'] = actions.delete_buffer },
+            n = { ['<CR>'] = open_multi_selection.open_single_or_multi, ['<c-d>'] = actions.delete_buffer },
           },
           layout_config = {
             vertical = { width = 0.95 },
