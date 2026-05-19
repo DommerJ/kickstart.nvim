@@ -79,5 +79,26 @@ local plugins = {
     -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
     lazy = false,
   },
+  {
+    'olimorris/codecompanion.nvim',
+    version = '^19.0.0',
+    opts = {
+      interactions = {
+        chat = {
+          adapter = 'gemini',
+        },
+        inline = {
+          adapter = 'gemini',
+        },
+        cmd = {
+          adapter = 'gemini',
+        },
+      },
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+  },
 }
 return plugins
