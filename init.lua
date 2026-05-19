@@ -100,6 +100,10 @@ vim.g.have_nerd_font = true
 
 -- Make line numbers default
 vim.o.number = true
+
+-- Do not fold everything
+vim.o.foldenable = false
+vim.wo.foldlevel = 20
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 -- vim.o.relativenumber = true
