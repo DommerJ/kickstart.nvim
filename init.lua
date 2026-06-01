@@ -435,7 +435,12 @@ require('lazy').setup({
           },
           path_display = { 'smart' },
         },
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            hidden = true,
+            no_ignore = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -663,7 +668,21 @@ require('lazy').setup({
       --  See `:help lsp-config` for information about keys and how to configure
       ---@type table<string, vim.lsp.Config>
       local servers = {
-        -- clangd = {},
+        clangd = {
+          root_markers = {
+            'compile_commands.json',
+            'compile_flags.txt',
+            'configure.ac', -- AutoTools
+            'Makefile',
+            'configure.ac',
+            'configure.in',
+            'config.h.in',
+            'meson.build',
+            'meson_options.txt',
+            'build.ninja',
+            '.git',
+          },
+        },
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
